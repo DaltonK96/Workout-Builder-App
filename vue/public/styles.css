@@ -1,0 +1,52 @@
+.login{
+    color: darkorange;
+    ;
+  }
+  
+  .form-signin {
+    text-decoration:cyan;
+    text-align: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    
+    
+  }
+
+  .form-register {
+    text-decoration:cyan;
+    text-align: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+
+#create-account{
+    font-family: fantasy;
+}
+
+  #app-title {
+    color:darkblue;
+    font-family:fantasy;
+    font-size: 50pt;
+    
+    }
+  
+  #psi{
+    color:black;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+  }
+  
+  .form-control{
+    text-align: center;
+    display: inline-block;
+  }
+  
+  .sr-only{
+    text-align: center;
+  }
+  
+  body {
+    background-color:orange
+    }
+
+  #home-link {
+      font-size: 30pt;
+  
+    }

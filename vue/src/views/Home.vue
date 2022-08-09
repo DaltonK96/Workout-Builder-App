@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1>Home</h1>
+    <h1 id="home-link">Home</h1>
     <p>You must be authenticated to see this</p>
   </div>
 </template>
