@@ -18,7 +18,10 @@
   }
 
 #create-account{
+  color:darkblue;
     font-family: fantasy;
+    font-size:50pt;
+    
 }
 
   #app-title {
@@ -29,8 +32,9 @@
     }
   
   #psi{
-    color:black;
-    font-family:Georgia, 'Times New Roman', Times, serif;
+    color:darkblue;
+    font-family:fantasy;
+    
   }
   
   
@@ -42,9 +46,16 @@
   }
   
 
-.form-items{
-  display: flex;
+#form-items{
+  display:flex;
   justify-content: center;
+  flex-direction: column;
+  margin-left:auto;
+  max-width: 25%;
+  margin-right:auto;
+
+
+  
 }
 
   body {
@@ -55,3 +66,28 @@
       font-size: 30pt;
   
     }
+
+    .form-control{
+  display:flex;
+  flex-direction: column;
+  margin-left:auto;
+  max-width: 50%;
+  margin-right:auto;
+    }
+  
+
+    img {
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 5px;
+      width: 150px;
+    }
+    
+    #HAA {
+      display:flex;
+      flex-direction:column;
+      margin-left:auto;
+      margin-right: auto;
+
+    }
+

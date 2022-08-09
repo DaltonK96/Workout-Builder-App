@@ -33,7 +33,7 @@
         required
       />
       <router-link :to="{ name: 'login' }">Have an account?</router-link>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">
+      <button id="HAA" class="btn btn-lg btn-primary btn-block" type="submit">
         Create Account
       </button>
     </form>

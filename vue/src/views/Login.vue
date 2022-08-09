@@ -2,6 +2,7 @@
   <div id="login" class="text-center">
     <form class="form-signin" @submit.prevent="login">
       <h1 class="Orange-Workout-Builder" id="app-title">Orange Workout Builder</h1>
+      <img src="https://previews.123rf.com/images/rudall30/rudall301508/rudall30150800050/44080361-cartoon-character-of-an-orange-with-muscular-hands.jpg">
       <h1 class="h3 mb-3 font-weight-normal" id="psi">Please Sign In</h1>
       <div
         class="alert alert-danger"
