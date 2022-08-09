@@ -33,15 +33,20 @@
     font-family:Georgia, 'Times New Roman', Times, serif;
   }
   
-  .form-control{
-    text-align: center;
-    display: inline-block;
-  }
+  
   
   .sr-only{
     text-align: center;
+    
+
   }
   
+
+.form-items{
+  display: flex;
+  justify-content: center;
+}
+
   body {
     background-color:orange
     }
