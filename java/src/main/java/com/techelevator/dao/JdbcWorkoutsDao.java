@@ -19,21 +19,21 @@ public class JdbcWorkoutsDao implements WorkoutDAO{
    {
        String sql = "INSERT INTO workouts(workout_name, workout_desc, expected_target) " +
                "VALUES (?,?,?)" +
-               "RETURNING workout_id";
+               "RETURNING workout_id;";
 
        Integer id = jdbcTemplate.queryForObject(sql, Integer.class, workoutName, workoutDesc, expectedTarget);
 
-       return getWorkoutId(id);
+       return getWorkoutById(id);
    }
 
    @Override
-   public Workout getWorkoutId(int workoutId)
+   public Workout getWorkoutById(int workoutId)
    {
        Workout workout = null;
 
        String sql = "SELECT * " +
                "FROM workouts " +
-               "WHERE workout_id = ?";
+               "WHERE workout_id = ?;";
 
        SqlRowSet results = jdbcTemplate.queryForRowSet(sql,workoutId);
 
