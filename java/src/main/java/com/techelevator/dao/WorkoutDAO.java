@@ -6,5 +6,5 @@ public interface WorkoutDAO
 {
     Workout create(String workoutName, String workoutDesc, String expectedTarget);
 
-    Workout getWorkoutId(int workoutId);
+    Workout getWorkoutById(int workoutId);
 }
