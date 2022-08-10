@@ -1,13 +1,15 @@
 <template>
   <div id="add-exercise">
       <form class="form-add-exercise" @submit.prevent="addExercise" >
+          <div class="add-Exercise">
+    <h1 id="add-Exercise-link">add Exercise</h1>
   <h1 id="add-exercise-test" class="h3 mb-3 font-weight-normal">Add Exercise </h1>
 
   <label for="workoutName"> WorkoutName</label>
   <input
   type="text"
   id="workoutName"
-  form="form-control"
+  class="add-ex-form"
   placeholder="workoutName"
   v-model="workout.workoutName"
   required
@@ -18,7 +20,7 @@
   <input
   type="text"
   id="workoutDesc"
-  form="form-control"
+  class="add-ex-form"
   placeholder="workoutDesc"
   v-model="workout.workoutDesc"
   required
@@ -29,14 +31,13 @@
   <input
   type="text"
   id="expectedTarget"
-  form="form-control"
+  class="add-ex-form"
   placeholder="expectedTarget"
   v-model="workout.expectedTarget"
   required
   autofocus
   />
-<router-link :to="{name:'AddExercise'}">Add new exercise?</router-link>
-<button class="btn btn-lg btn-primary btn-block" type="add">
+<button v-on:click="addExercise" class="btn btn-lg btn-primary btn-block" type="add">
     Add Workout
 </button>
       </form>
@@ -64,13 +65,24 @@ export default {
     },
     method: {
         addExercise(){
-            if(this.workout.workoutName != this.workout.confirmworkoutName){
-                this.addExerciseErrors = true;
-                this. addExerciseErrorMsg = 'Exercise is not an option. ';
-            }else{
-               WorkoutService 
+         WorkoutService 
+            .addExercise(this.workout)
+            .then((response) => {
+                if(response.status ==201){
+                this.$router.push({
+                    path:'/workout',
+                    query:{ WorkoutService: 'success'},
+                });
             }
-        }
+        })
+          .catch((error) => {
+            const response = error.response;
+            this.registrationErrors = true;
+            if (response.status === 400) {
+              this.addExerciseErrorMsg = 'Bad Request: Validation Errors';
+            }
+          });
+      }
 
     }
 }
