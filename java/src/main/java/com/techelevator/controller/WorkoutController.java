@@ -8,13 +8,11 @@ import com.techelevator.model.DifficultyLevelDTO;
 import com.techelevator.model.Workout;
 import com.techelevator.model.WorkoutDTO;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 //@PreAuthorize("isAuthenticated()")
 @RestController
+@CrossOrigin
 public class WorkoutController
 {
     private WorkoutDAO workoutDAO;
@@ -47,7 +45,7 @@ public class WorkoutController
     }
 
     @RequestMapping(path = "workouts/intermediate", method = RequestMethod.POST)
-    public DifficultyLevel newIntermediateWorkout(RequestBody DifficultyLevelDTO difficultyLevelDTO)
+    public DifficultyLevel newIntermediateWorkout(@RequestBody DifficultyLevelDTO difficultyLevelDTO)
     {
         DifficultyLevel difficultyLevel = intermediateDao.create(difficultyLevelDTO.getWorkoutId(),
                 difficultyLevelDTO.getWeight(), difficultyLevelDTO.getRepSet(),difficultyLevelDTO.getExpectedTime());
