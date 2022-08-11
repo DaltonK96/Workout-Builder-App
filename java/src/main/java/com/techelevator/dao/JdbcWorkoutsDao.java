@@ -5,6 +5,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class JdbcWorkoutsDao implements WorkoutDAO{
 
@@ -45,6 +48,26 @@ public class JdbcWorkoutsDao implements WorkoutDAO{
        return workout;
    }
 
+   @Override
+   public List<Workout> getAllWorkouts()
+   {
+       List<Workout> workouts = new ArrayList<>();
+
+       String sql = "SELECT * " +
+               "FROM workouts;";
+
+       SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+
+       while (results.next())
+       {
+           Workout workout = mapRowToWorkout(results);
+           workouts.add(workout);
+       }
+
+       return workouts;
+   }
+
+   public List<>
 
    private Workout mapRowToWorkout(SqlRowSet rowSet) {
        Workout workout = new Workout();

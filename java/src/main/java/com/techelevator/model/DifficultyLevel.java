@@ -3,11 +3,11 @@ package com.techelevator.model;
 public class DifficultyLevel {
     private int id;
     private int workoutId;
-    private int weight;
+    private String weight;
     private String repSet;
     private int expectedTime;
 
-    public DifficultyLevel(int id, int workoutId, int weight, String repSet, int expectedTime) {
+    public DifficultyLevel(int id, int workoutId, String weight, String repSet, int expectedTime) {
         this.id = id;
         this.workoutId = workoutId;
         this.weight = weight;
@@ -34,11 +34,11 @@ public class DifficultyLevel {
         this.workoutId = workoutId;
     }
 
-    public int getWeight() {
+    public String getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(String weight) {
         this.weight = weight;
     }
 

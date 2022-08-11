@@ -2,6 +2,10 @@ BEGIN TRANSACTION;
 
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS workouts;
+DROP TABLE IF EXISTS beginner_workouts;
+DROP TABLE IF EXISTS intermediate_workouts;
+DROP TABLE IF EXISTS extreme_workouts;
+
 
 CREATE TABLE users (
 	user_id SERIAL,
