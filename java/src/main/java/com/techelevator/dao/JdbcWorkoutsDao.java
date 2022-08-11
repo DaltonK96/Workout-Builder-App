@@ -67,7 +67,7 @@ public class JdbcWorkoutsDao implements WorkoutDAO{
        return workouts;
    }
 
-   public List<>
+   //public List<Workout>
 
    private Workout mapRowToWorkout(SqlRowSet rowSet) {
        Workout workout = new Workout();

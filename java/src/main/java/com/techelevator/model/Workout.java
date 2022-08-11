@@ -5,6 +5,12 @@ public class Workout {
     private String workoutName;
     private String workoutDesc;
     private String expectedTarget;
+    private String weight;
+    private String repSet;
+    private int time;
+
+
+
 
     public Workout() {
     };
@@ -14,6 +20,16 @@ public class Workout {
         this.workoutName = workoutName;
         this.workoutDesc = workoutName;
         this.expectedTarget = expectedTarget;
+    }
+    public Workout(int workoutId, String workoutName, String workoutDesc, String expectedTarget,
+                   String weight, String repSet, int time) {
+        this.workoutId = workoutId;
+        this.workoutName = workoutName;
+        this.workoutDesc = workoutName;
+        this.expectedTarget = expectedTarget;
+        this.weight = weight;
+        this.repSet = repSet;
+        this.time = time;
     }
 
     public int getWorkoutId() {
@@ -46,6 +62,30 @@ public class Workout {
 
     public void setExpectedTarget(String expectedTarget) {
         this.expectedTarget = expectedTarget;
+    }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
+
+    public String getRepSet() {
+        return repSet;
+    }
+
+    public void setRepSet(String repSet) {
+        this.repSet = repSet;
+    }
+
+    public int getTime() {
+        return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
     }
 
 
