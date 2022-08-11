@@ -1,6 +1,10 @@
 <template>
   <div class="home">
     <h1 id="home-link">Home</h1>
+    <nav>
+    <router-link v-bind:to="{ name: 'AddExercise' }">Add Exercise</router-link>&nbsp;|&nbsp;
+    <router-link v-bind:to="{ name: 'EditExercise' }">Edit Exercise</router-link>&nbsp;|&nbsp;
+    </nav>
     <p>You must be authenticated to see this</p>
   </div>
 </template>
