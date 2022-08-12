@@ -7,6 +7,7 @@ import Register from '../views/Register.vue'
 import store from '../store/index'
 import AddExercise from '../views/AddExercise.vue'
 import EditExercise from '../views/EditExercise.vue'
+import ListExercise from '../views/ListExercise.vue'
 
 Vue.use(Router)
 
@@ -83,6 +84,14 @@ const router = new Router({
       path: "/workouts/extreme",
       name: "EditExercise",
       component: EditExercise,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: "/workouts",
+      name: "ListExercise",
+      component: ListExercise,
       meta: {
         requiresAuth: false
       }

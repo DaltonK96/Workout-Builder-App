@@ -90,10 +90,7 @@ methods: {
             }
           });
       }
-      getExercise(){
-        WorkoutService
-        .getExercise()
-      }
+     
 }
 }
 

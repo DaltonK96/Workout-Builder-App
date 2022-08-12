@@ -4,6 +4,7 @@
     <nav>
     <router-link v-bind:to="{ name: 'AddExercise' }">Add Exercise</router-link>&nbsp;|&nbsp;
     <router-link v-bind:to="{ name: 'EditExercise' }">Edit Exercise</router-link>&nbsp;|&nbsp;
+     <router-link v-bind:to="{ name: 'ListExercise' }">View Exercises</router-link>&nbsp;|&nbsp;
     </nav>
   
   </div>
