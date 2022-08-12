@@ -67,7 +67,66 @@ public class JdbcWorkoutsDao implements WorkoutDAO{
        return workouts;
    }
 
-   //public List<Workout>
+   @Override
+   public List<Workout> getFullBeginnerWorkouts() {
+       List<Workout> workouts = new ArrayList<>();
+       String sql = "SELECT workout_name, workout_desc, expected_target, beginner_workouts.weight, beginner_workouts.expected_rep_set, beginner_workouts.expected_time " +
+               "FROM workouts " + "JOIN beginner_workouts ON workouts.workout_id = beginner_workouts.workout_id;";
+       SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+
+       while (results.next())
+       {
+           Workout workout = mapRowToFullWorkout(results);
+           workouts.add(workout);
+       }
+
+       return workouts;
+   }
+
+    @Override
+    public List<Workout> getFullIntermediateWorkouts() {
+        List<Workout> workouts = new ArrayList<>();
+        String sql = "SELECT workout_name, workout_desc, expected_target, intermediate_workouts.weight, intermediate_workouts.expected_rep_set, intermediate_workouts.expected_time " +
+                "FROM workouts " + "JOIN intermediate_workouts ON workouts.workout_id = intermediate_workouts.workout_id;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+
+        while (results.next())
+        {
+            Workout workout = mapRowToFullWorkout(results);
+            workouts.add(workout);
+        }
+
+        return workouts;
+    }
+
+    @Override
+    public List<Workout> getFullExtremeWorkouts() {
+        List<Workout> workouts = new ArrayList<>();
+        String sql = "SELECT workout_name, workout_desc, expected_target, extreme_workouts.weight, extreme_workouts.expected_rep_set, extreme_workouts.expected_time " +
+                "FROM workouts " + "JOIN extreme_workouts ON workouts.workout_id = extreme_workouts.workout_id;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+
+        while (results.next())
+        {
+            Workout workout = mapRowToFullWorkout(results);
+            workouts.add(workout);
+        }
+
+        return workouts;
+    }
+
+    @Override
+    public List<Workout> getAllFullWorkouts() {
+        List<Workout> beginnerWorkouts = getFullBeginnerWorkouts();
+        List<Workout> intermediateWorkouts = getFullIntermediateWorkouts();
+        List<Workout> extremeWorkouts = getFullExtremeWorkouts();
+        List<Workout> allWorkouts = new ArrayList<>();
+        allWorkouts.addAll(beginnerWorkouts);
+        allWorkouts.addAll(intermediateWorkouts);
+        allWorkouts.addAll(extremeWorkouts);
+
+        return allWorkouts;
+    }
 
    private Workout mapRowToWorkout(SqlRowSet rowSet) {
        Workout workout = new Workout();
@@ -77,4 +136,14 @@ public class JdbcWorkoutsDao implements WorkoutDAO{
        workout.setExpectedTarget(rowSet.getString("expected_target"));
        return workout;
    }
+    private Workout mapRowToFullWorkout(SqlRowSet rowSet) {
+        Workout workout = new Workout();
+        workout.setWorkoutName(rowSet.getString("workout_name"));
+        workout.setWorkoutDesc(rowSet.getString("workout_desc"));
+        workout.setExpectedTarget(rowSet.getString("expected_target"));
+        workout.setWeight(rowSet.getString("weight"));
+        workout.setRepSet(rowSet.getString("expected_rep_set"));
+        workout.setTime(rowSet.getInt("expected_time"));
+        return workout;
+    }
 }

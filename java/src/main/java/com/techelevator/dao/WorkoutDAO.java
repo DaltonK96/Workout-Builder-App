@@ -11,4 +11,12 @@ public interface WorkoutDAO
     Workout getWorkoutById(int workoutId);
 
     List<Workout> getAllWorkouts();
+
+    List<Workout> getFullBeginnerWorkouts();
+
+    List<Workout> getFullIntermediateWorkouts();
+
+    List<Workout> getFullExtremeWorkouts();
+
+    List<Workout> getAllFullWorkouts();
 }

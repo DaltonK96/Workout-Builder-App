@@ -74,21 +74,27 @@ public class WorkoutController
     }
 
     @RequestMapping(path = "/workouts/beginner", method = RequestMethod.GET)
-    public List<DifficultyLevel> listBeginnerWorkouts()
+    public List<Workout> listBeginnerWorkouts()
     {
-        return beginnerDao.getAllBeginnerWorkouts();
+        return workoutDAO.getFullBeginnerWorkouts();
     }
 
     @RequestMapping(path = "/workouts/intermediate", method = RequestMethod.GET)
-    public List<DifficultyLevel> listIntermediateWorkouts()
+    public List<Workout> listIntermediateWorkouts()
     {
-        return intermediateDao.getAllIntermediateWorkouts();
+        return workoutDAO.getFullIntermediateWorkouts();
     }
 
     @RequestMapping(path = "/workouts/extreme", method = RequestMethod.GET)
-    public List<DifficultyLevel> listExtremeWorkouts()
+    public List<Workout> listExtremeWorkouts()
     {
-        return extremeDao.getAllExtremeWorkouts();
+        return workoutDAO.getFullExtremeWorkouts();
+    }
+
+    @RequestMapping(path= "/workouts/all", method = RequestMethod.GET)
+    public List<Workout> listAllWorkouts()
+    {
+        return workoutDAO.getAllFullWorkouts();
     }
 
 }
