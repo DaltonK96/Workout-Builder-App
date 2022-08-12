@@ -6,7 +6,7 @@ import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
 import AddExercise from '../views/AddExercise.vue'
-//import EditExercise from '../views/EditExercise.vue'
+import EditExercise from '../views/EditExercise.vue'
 
 Vue.use(Router)
 
@@ -64,14 +64,29 @@ const router = new Router({
       }
     },
     {
-      path: "/workouts",
+      path: "/workouts/beginner",
       name: "EditExercise",
-      component: AddExercise,
+      component: EditExercise,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: "/workouts/intermediate",
+      name: "EditExercise",
+      component: EditExercise,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: "/workouts/extreme",
+      name: "EditExercise",
+      component: EditExercise,
       meta: {
         requiresAuth: false
       }
     }
-
   ]
 })
 

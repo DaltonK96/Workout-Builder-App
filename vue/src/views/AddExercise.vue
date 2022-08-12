@@ -37,39 +37,6 @@
   </optgroup>
 </select>
 
-
-
-
-<!--<input type="checkbox" id="arms" value="arms" v-model="workout.expectedArea">
-<label for="arms">Arms</label>
-
-<input type="checkbox" id="legs" value="legs" v-model="workout.expectedArea">
-<label for="legs">Legs</label>
-
-<input type="checkbox" id="abs" value="abs" v-model="workout.expectedArea">
-<label for="abs">Abs</label>
-
-<input type="checkbox" id="back" value="back" v-model="workout.expectedArea">
-<label for="back">Back</label>
-
-<input type="checkbox" id="cardio" value="cardio" v-model="workout.expectedArea">
-<label for="cardio">Cardio</label>
-
-<input type="checkbox" id="totalBody" value="totalBody" v-model="workout.expectedArea">
-<label for="totalBody">Total Body</label> -->
-
-  <!-- <label for="expectedTarget"> expectedTarget</label>
-  <input
-  type="dropdown"
-  id="expectedTarget"
-  class="add-ex-form"
-  placeholder="expectedTarget"
-  v-model="workout.expectedTarget"
-  required
-  autofocus
-  />
-  -->
-
 <button v-on:click="addExercise" class="btn btn-lg btn-primary btn-block" type="add">
     Add Workout
 </button>
