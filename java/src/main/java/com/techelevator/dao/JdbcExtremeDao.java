@@ -63,6 +63,22 @@ public class JdbcExtremeDao implements ExtremeDao
         return extremeWorkouts;
     }
 
+    @Override
+    public DifficultyLevel updateExtremeWorkout(int id, int workoutId, String weight, String repSet, int time)
+    {
+        String sql = "update extreme_workouts " +
+                "SET weight = ?, expected_rep_set = ?, expected_time = ? " +
+                "WHERE extreme_id = ?";
+
+        DifficultyLevel extreme = getExtremeLevelById(id);
+        extreme.setWeight(weight);
+        extreme.setRepSet(repSet);
+        extreme.setExpectedTime(time);
+        jdbcTemplate.update(sql, weight, repSet, time, id);
+
+        return extreme;
+    }
+
     private DifficultyLevel mapRowToExtreme (SqlRowSet rowSet)
     {
         DifficultyLevel difficultyLevel = new DifficultyLevel();

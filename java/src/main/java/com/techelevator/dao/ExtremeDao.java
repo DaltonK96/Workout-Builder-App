@@ -10,5 +10,8 @@ public interface ExtremeDao
 
     DifficultyLevel getExtremeLevelById(int extremeId);
 
-    public List<DifficultyLevel> getAllExtremeWorkouts();
+    List<DifficultyLevel> getAllExtremeWorkouts();
+
+    DifficultyLevel updateExtremeWorkout(int id, int workoutId, String weight, String repSet, int time);
+
 }

@@ -66,6 +66,21 @@ public class JdbcIntermediateDao implements IntermediateDao
         return intermediateWorkouts;
     }
 
+    @Override
+    public DifficultyLevel updateIntermediateWorkout(int id, int workoutId, String weight, String repSet, int time)
+    {
+        String sql = "update intermediate_workouts " +
+                "SET weight = ?, expected_rep_set = ?, expected_time = ? " +
+                "WHERE intermediate_id = ?";
+
+        DifficultyLevel intermediate = getIntermediateLevelById(id);
+        intermediate.setWeight(weight);
+        intermediate.setRepSet(repSet);
+        intermediate.setExpectedTime(time);
+        jdbcTemplate.update(sql, weight, repSet, time, id);
+
+        return intermediate;
+    }
 
     private DifficultyLevel mapRowToIntermediate (SqlRowSet rowSet)
     {

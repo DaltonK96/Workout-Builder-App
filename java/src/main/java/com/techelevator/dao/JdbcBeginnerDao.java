@@ -64,6 +64,22 @@ public class JdbcBeginnerDao implements BeginnerDao {
         return beginnerWorkouts;
     }
 
+    @Override
+    public DifficultyLevel updateBeginnerWorkout(int id, int workoutId, String weight, String repSet, int time)
+    {
+        String sql = "update beginner_workouts " +
+                "SET weight = ?, expected_rep_set = ?, expected_time = ? " +
+                "WHERE beginner_id = ?";
+
+        DifficultyLevel beginner = getBeginnerLevelById(id);
+        beginner.setWeight(weight);
+        beginner.setRepSet(repSet);
+        beginner.setExpectedTime(time);
+        jdbcTemplate.update(sql, weight, repSet, time, id);
+
+        return beginner;
+    }
+
     private DifficultyLevel mapRowToBeginner (SqlRowSet rowSet) {
         DifficultyLevel difficultyLevel = new DifficultyLevel();
         difficultyLevel.setId(rowSet.getInt("beginner_id"));

@@ -10,4 +10,6 @@ public interface BeginnerDao {
     DifficultyLevel getBeginnerLevelById(int beginnerId);
 
     List<DifficultyLevel> getAllBeginnerWorkouts();
+
+    DifficultyLevel updateBeginnerWorkout(int id, int workoutId, String weight, String repSet, int time);
 }

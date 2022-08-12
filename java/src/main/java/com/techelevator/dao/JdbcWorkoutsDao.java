@@ -128,6 +128,61 @@ public class JdbcWorkoutsDao implements WorkoutDAO{
         return allWorkouts;
     }
 
+    @Override
+    public List<Workout> getWorkoutByTarget(String target)
+    {
+        List<Workout> allWorkouts = getAllFullWorkouts();
+        List<Workout> targetWorkout = new ArrayList<>();
+
+        for (Workout workout: allWorkouts)
+        {
+            String workoutTarget = workout.getExpectedTarget();
+
+            if (workoutTarget.equals(target))
+            {
+                targetWorkout.add(workout);
+            }
+
+        }
+
+        return targetWorkout;
+    }
+
+    @Override
+    public List<Workout> getWorkoutByTime(int time)
+    {
+        List<Workout> allWorkouts = getAllFullWorkouts();
+        List<Workout> timeWorkouts = new ArrayList<>();
+
+        for (Workout workout: allWorkouts)
+        {
+            int workoutTime = workout.getTime();
+
+            if (workoutTime == time)
+            {
+                timeWorkouts.add(workout);
+            }
+
+        }
+
+        return timeWorkouts;
+    }
+    @Override
+    public Workout updateWorkout(int id, String name, String desc, String target)
+    {
+        String sql = "UPDATE workouts " +
+                "SET workout_name = ?, workout_desc = ?, expected_target = ? " +
+                "WHERE workout_id = ?;";
+
+        Workout workout = getWorkoutById(id);
+        workout.setWorkoutName(name);
+        workout.setWorkoutDesc(desc);
+        workout.setExpectedTarget(target);
+        jdbcTemplate.update(sql, name, desc, target, id);
+
+        return workout;
+    }
+
    private Workout mapRowToWorkout(SqlRowSet rowSet) {
        Workout workout = new Workout();
        workout.setWorkoutId(rowSet.getInt("workout_id"));

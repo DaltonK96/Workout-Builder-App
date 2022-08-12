@@ -97,4 +97,43 @@ public class WorkoutController
         return workoutDAO.getAllFullWorkouts();
     }
 
+    @RequestMapping(path = "/workouts/target/{target}", method = RequestMethod.GET)
+    public List<Workout> listWorkoutByTarget(@PathVariable("target") String target)
+    {
+        return workoutDAO.getWorkoutByTarget(target);
+    }
+
+    @RequestMapping(path = "/workouts/time/{time}", method = RequestMethod.GET)
+    public List<Workout> listWorkoutByTime(@PathVariable("time") int time)
+    {
+        return workoutDAO.getWorkoutByTime(time);
+    }
+
+    @RequestMapping(path = "/workouts/updatedWorkout", method = RequestMethod.PUT)
+    public Workout updateWorkout(@RequestBody WorkoutDTO workoutDTO)
+    {
+        return workoutDAO.updateWorkout(workoutDTO.getWorkoutId(),workoutDTO.getWorkoutName(),
+                workoutDTO.getWorkoutDesc(),workoutDTO.getExpectedTarget());
+    }
+
+    @RequestMapping(path = "/workouts/updatedBeginner", method = RequestMethod.PUT)
+    public DifficultyLevel updateBeginnerWorkout(@RequestBody DifficultyLevel difficultyLevel)
+    {
+        return beginnerDao.updateBeginnerWorkout(difficultyLevel.getId(),difficultyLevel.
+                getWorkoutId(),difficultyLevel.getWeight(),difficultyLevel.getRepSet(),difficultyLevel.getExpectedTime());
+    }
+
+    @RequestMapping(path = "/workouts/updatedIntermediate", method = RequestMethod.PUT)
+    public DifficultyLevel updateIntermediateWorkout(@RequestBody DifficultyLevel difficultyLevel)
+    {
+        return intermediateDao.updateIntermediateWorkout(difficultyLevel.getId(),difficultyLevel.
+                getWorkoutId(),difficultyLevel.getWeight(),difficultyLevel.getRepSet(),difficultyLevel.getExpectedTime());
+    }
+
+    @RequestMapping(path = "/workouts/updatedExtreme", method = RequestMethod.PUT)
+    public DifficultyLevel updateExtremeWorkout(@RequestBody DifficultyLevel difficultyLevel)
+    {
+        return extremeDao.updateExtremeWorkout(difficultyLevel.getId(),difficultyLevel.
+                getWorkoutId(),difficultyLevel.getWeight(),difficultyLevel.getRepSet(),difficultyLevel.getExpectedTime());
+    }
 }

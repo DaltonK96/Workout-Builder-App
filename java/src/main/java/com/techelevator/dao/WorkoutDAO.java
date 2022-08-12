@@ -19,4 +19,10 @@ public interface WorkoutDAO
     List<Workout> getFullExtremeWorkouts();
 
     List<Workout> getAllFullWorkouts();
+
+    List<Workout> getWorkoutByTarget(String target);
+
+    List<Workout> getWorkoutByTime(int time);
+
+    Workout updateWorkout(int id, String name, String desc, String target);
 }
