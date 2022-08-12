@@ -66,12 +66,27 @@ const router = new Router({
     {
       path: "/workouts/beginner",
       name: "EditExercise",
-      component: AddExercise,
+      component: EditExercise,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: "/workouts/intermediate",
+      name: "EditExercise",
+      component: EditExercise,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: "/workouts/extreme",
+      name: "EditExercise",
+      component: EditExercise,
       meta: {
         requiresAuth: false
       }
     }
-
   ]
 })
 

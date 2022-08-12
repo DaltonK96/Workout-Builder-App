@@ -5,6 +5,11 @@ export default {
   addExercise(user) {
     return axios.post('/workouts', user)
   },
+  getExercise(user) {
+    return axios.get('/workouts', user)
+  },
+
+
 
   editExercise(user,level){
     if(level=== "beginner"){
