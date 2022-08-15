@@ -70,7 +70,7 @@ public class JdbcWorkoutsDao implements WorkoutDAO{
    @Override
    public List<Workout> getFullBeginnerWorkouts() {
        List<Workout> workouts = new ArrayList<>();
-       String sql = "SELECT workout_name, workout_desc, expected_target, beginner_workouts.weight, beginner_workouts.expected_rep_set, beginner_workouts.expected_time " +
+       String sql = "SELECT beginner_workouts.workout_id, workout_name, workout_desc, expected_target, beginner_workouts.weight, beginner_workouts.expected_rep_set, beginner_workouts.expected_time " +
                "FROM workouts " + "JOIN beginner_workouts ON workouts.workout_id = beginner_workouts.workout_id;";
        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
@@ -86,7 +86,7 @@ public class JdbcWorkoutsDao implements WorkoutDAO{
     @Override
     public List<Workout> getFullIntermediateWorkouts() {
         List<Workout> workouts = new ArrayList<>();
-        String sql = "SELECT workout_name, workout_desc, expected_target, intermediate_workouts.weight, intermediate_workouts.expected_rep_set, intermediate_workouts.expected_time " +
+        String sql = "SELECT intermediate_workouts.workout_id, workout_name, workout_desc, expected_target, intermediate_workouts.weight, intermediate_workouts.expected_rep_set, intermediate_workouts.expected_time " +
                 "FROM workouts " + "JOIN intermediate_workouts ON workouts.workout_id = intermediate_workouts.workout_id;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
@@ -102,7 +102,7 @@ public class JdbcWorkoutsDao implements WorkoutDAO{
     @Override
     public List<Workout> getFullExtremeWorkouts() {
         List<Workout> workouts = new ArrayList<>();
-        String sql = "SELECT workout_name, workout_desc, expected_target, extreme_workouts.weight, extreme_workouts.expected_rep_set, extreme_workouts.expected_time " +
+        String sql = "SELECT workouts.workout_id, workout_name, workout_desc, expected_target, extreme_workouts.weight, extreme_workouts.expected_rep_set, extreme_workouts.expected_time " +
                 "FROM workouts " + "JOIN extreme_workouts ON workouts.workout_id = extreme_workouts.workout_id;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
@@ -193,6 +193,7 @@ public class JdbcWorkoutsDao implements WorkoutDAO{
    }
     private Workout mapRowToFullWorkout(SqlRowSet rowSet) {
         Workout workout = new Workout();
+        workout.setWorkoutId(rowSet.getInt("workout_id"));
         workout.setWorkoutName(rowSet.getString("workout_name"));
         workout.setWorkoutDesc(rowSet.getString("workout_desc"));
         workout.setExpectedTarget(rowSet.getString("expected_target"));

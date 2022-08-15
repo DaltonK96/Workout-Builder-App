@@ -21,9 +21,10 @@ public class Workout {
         this.workoutDesc = workoutName;
         this.expectedTarget = expectedTarget;
     }
-    public Workout(String workoutName, String workoutDesc, String expectedTarget,
-                   String weight, String repSet, int time) {
-
+    public Workout(int workoutId, String workoutName, String workoutDesc, String expectedTarget,
+                   String weight, String repSet, int time)
+    {
+        this.workoutId = workoutId;
         this.workoutName = workoutName;
         this.workoutDesc = workoutName;
         this.expectedTarget = expectedTarget;

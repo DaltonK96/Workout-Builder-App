@@ -54,4 +54,17 @@ CREATE TABLE intermediate_workouts (
          CONSTRAINT PK_extreme PRIMARY KEY (extreme_id)
           );
 
+ CREATE TABLE workouts_difficulty
+ (
+    difficulty_id SERIAL,
+    workout_id SERIAL,
+    beginner_id SERIAL,
+    intermediate_id SERIAL,
+    extreme_id SERIAL,
+    CONSTRAINT PK_difficulty PRIMARY KEY (difficulty_id),
+    CONSTRAINT FK_beginner FOREIGN KEY (beginner_id) REFERENCES beginner_workouts(beginner_id),
+    CONSTRAINT FK_intermediate FOREIGN KEY (intermediate_id) REFERENCES intermediate_workouts(intermediate_id),
+    CONSTRAINT FK_extreme FOREIGN KEY (extreme_id) REFERENCES extreme_workouts(extreme_id)
+ );
+
 COMMIT TRANSACTION;
