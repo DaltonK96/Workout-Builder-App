@@ -19,7 +19,8 @@ if(currentToken != null) {
 export default new Vuex.Store({
   state: {
     token: currentToken || '',
-    user: currentUser || {}
+    user: currentUser || {} ,
+    uniqueWorkouts: []
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -37,6 +38,10 @@ export default new Vuex.Store({
       state.token = '';
       state.user = {};
       axios.defaults.headers.common = {};
+    },
+    SET_UNIQUE_LIST_EXERCISE(state, workouts) {
+      state.uniqueWorkouts = workouts;
     }
+
   }
 })
