@@ -20,7 +20,7 @@
                   <td>{{workout.time}}</td>
                   
                   <td>
-                      <router-link v-bind:to="{name: 'Edit', params: {workoutId: workout.workoutId}}">Edit</router-link>
+                      <router-link v-bind:to="{name: 'EditExercise', params: {workoutId: workout.workoutId}}">Edit</router-link>
                       &nbsp; &nbsp;
                       <a href="#" v-on:click="deleteExercise(workout.workoutId)" >Delete</a>
                   </td>
