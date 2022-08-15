@@ -18,11 +18,11 @@ public class JdbcExtremeDao implements ExtremeDao
     @Override
     public DifficultyLevel create(int workoutId, int weight, String repSet, int expectedTime)
     {
-        String sql = "INSERT INTO extreme_workouts(workout_id, weight, expected_rep_set, expected_tim) " +
-                "VALUES (?, ?, ?, ?)" +
+        String sql = "INSERT INTO extreme_workouts(workout_id, weight, expected_rep_set, expected_time, difficulty) " +
+                "VALUES (?, ?, ?, ?,?)" +
                 "RETURNING extreme_id;";
 
-        Integer id = jdbcTemplate.queryForObject(sql, Integer.class, workoutId, weight, repSet, expectedTime);
+        Integer id = jdbcTemplate.queryForObject(sql, Integer.class, workoutId, weight, repSet, expectedTime, "extreme");
 
         return getExtremeLevelById(id);
     }
@@ -87,6 +87,7 @@ public class JdbcExtremeDao implements ExtremeDao
         difficultyLevel.setWeight(rowSet.getString("weight"));
         difficultyLevel.setRepSet(rowSet.getString("expected_rep_set"));
         difficultyLevel.setExpectedTime(rowSet.getInt("expected_time"));
+        difficultyLevel.setDifficulty(rowSet.getString("difficulty"));
         return difficultyLevel;
     }
 }

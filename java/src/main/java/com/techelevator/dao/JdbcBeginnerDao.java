@@ -20,10 +20,10 @@ public class JdbcBeginnerDao implements BeginnerDao {
 
     @Override
     public DifficultyLevel create (int workoutId, int weight, String repSet, int expectedTime) {
-        String sql = "INSERT INTO beginner_workouts(workout_id, weight, expected_rep_set, expected_time) " +
-                "VALUES (?, ?, ?, ?)" +
+        String sql = "INSERT INTO beginner_workouts(workout_id, weight, expected_rep_set, expected_time, difficulty) " +
+                "VALUES (?, ?, ?, ?, ?) " +
                 "RETURNING beginner_id;";
-        Integer beginnerId = jdbcTemplate.queryForObject(sql, Integer.class, workoutId, weight, repSet, expectedTime);
+        Integer beginnerId = jdbcTemplate.queryForObject(sql, Integer.class, workoutId, weight, repSet, expectedTime, "beginner");
 
         return getBeginnerLevelById(beginnerId);
 
@@ -87,6 +87,7 @@ public class JdbcBeginnerDao implements BeginnerDao {
         difficultyLevel.setWeight(rowSet.getString("weight"));
         difficultyLevel.setRepSet(rowSet.getString("expected_rep_set"));
         difficultyLevel.setExpectedTime(rowSet.getInt("expected_time"));
+        difficultyLevel.setDifficulty(rowSet.getString("difficulty"));
         return difficultyLevel;
     }
 

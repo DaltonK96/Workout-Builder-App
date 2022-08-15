@@ -21,11 +21,11 @@ public class JdbcIntermediateDao implements IntermediateDao
     @Override
     public DifficultyLevel create (int workoutId, int weight, String repSet, int expectedTime)
     {
-        String sql = "INSERT INTO intermediate_workouts(workout_id, weight, expected_rep_set, expected_tim) " +
-                "VALUES (?, ?, ?, ?)" +
+        String sql = "INSERT INTO intermediate_workouts(workout_id, weight, expected_rep_set, expected_time, difficulty) " +
+                "VALUES (?, ?, ?, ?, ?)" +
                 "RETURNING intermediate_id;";
 
-        Integer id = jdbcTemplate.queryForObject(sql, Integer.class, workoutId, weight, repSet, expectedTime);
+        Integer id = jdbcTemplate.queryForObject(sql, Integer.class, workoutId, weight, repSet, expectedTime, "intermediate");
 
         return getIntermediateLevelById(id);
     }
@@ -90,6 +90,7 @@ public class JdbcIntermediateDao implements IntermediateDao
         difficultyLevel.setWeight(rowSet.getString("weight"));
         difficultyLevel.setRepSet(rowSet.getString("expected_rep_set"));
         difficultyLevel.setExpectedTime(rowSet.getInt("expected_time"));
+        difficultyLevel.setDifficulty(rowSet.getString("difficulty"));
         return difficultyLevel;
     }
 }
