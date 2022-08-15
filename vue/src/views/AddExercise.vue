@@ -64,6 +64,7 @@ export default {
         };
     },
     methods: {
+      
         addExercise(){
          WorkoutService 
             .addExercise(this.workout)
@@ -82,7 +83,25 @@ export default {
               this.addExerciseErrorMsg = 'Bad Request: Validation Errors';
             }
           });
-      }
+
+          saveWorkout() {
+
+            WorkoutService.saveWorkout(this.workout).then(
+                () => {
+                    this.$router.push({name: "List"});
+                }
+            ).catch(
+                error => {
+                    if(error.response) {
+                        this.errorMsg = error.response.statusText;
+                    } else if (error.request) {
+                        this.errorMsg = "We couldn't find the server";
+                    } else {
+                        this.errorMsg = "Error - we couldn't create the request";
+                    }
+                }
+            );
+        }
 
     }
 }
