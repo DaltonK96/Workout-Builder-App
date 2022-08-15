@@ -136,4 +136,9 @@ public class WorkoutController
         return extremeDao.updateExtremeWorkout(difficultyLevel.getId(),difficultyLevel.
                 getWorkoutId(),difficultyLevel.getWeight(),difficultyLevel.getRepSet(),difficultyLevel.getExpectedTime());
     }
+
+    @RequestMapping(path = "/workouts/{id}", method = RequestMethod.GET)
+    public Workout getWorkoutById(@PathVariable ("id") int id) {
+        return workoutDAO.getWorkoutById(id);
+    }
 }

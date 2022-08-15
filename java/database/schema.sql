@@ -28,8 +28,10 @@ CREATE TABLE beginner_workouts (
     beginner_id SERIAL,
     workout_id SERIAL,
     weight varchar(20),
-    expected_rep_set varchar(100) NOT NULL,
+    expected_rep_set varchar(100),
     expected_time int,
+    difficulty varchar(100),
+    CONSTRAINT valid_difficulty CHECK (difficulty IN ('beginner')),
     CONSTRAINT FK_workout FOREIGN KEY (workout_id) REFERENCES workouts(workout_id),
     CONSTRAINT PK_beginner PRIMARY KEY (beginner_id)
     );
@@ -40,6 +42,8 @@ CREATE TABLE intermediate_workouts (
         weight varchar(20),
         expected_rep_set varchar(100) NOT NULL,
         expected_time int,
+        difficulty varchar(100),
+        CONSTRAINT valid_difficulty CHECK (difficulty IN ('intermediate')),
         CONSTRAINT FK_workout FOREIGN KEY (workout_id) REFERENCES workouts(workout_id),
         CONSTRAINT PK_intermediate PRIMARY KEY (intermediate_id)
         );
@@ -50,21 +54,29 @@ CREATE TABLE intermediate_workouts (
          weight varchar(20),
          expected_rep_set varchar(100) NOT NULL,
          expected_time int,
+         difficulty varchar(100),
+         CONSTRAINT valid_difficulty CHECK (difficulty IN ('extreme')),
          CONSTRAINT FK_workout FOREIGN KEY (workout_id) REFERENCES workouts(workout_id),
          CONSTRAINT PK_extreme PRIMARY KEY (extreme_id)
           );
 
- CREATE TABLE workouts_difficulty
- (
-    difficulty_id SERIAL,
-    workout_id SERIAL,
-    beginner_id SERIAL,
-    intermediate_id SERIAL,
-    extreme_id SERIAL,
-    CONSTRAINT PK_difficulty PRIMARY KEY (difficulty_id),
-    CONSTRAINT FK_beginner FOREIGN KEY (beginner_id) REFERENCES beginner_workouts(beginner_id),
-    CONSTRAINT FK_intermediate FOREIGN KEY (intermediate_id) REFERENCES intermediate_workouts(intermediate_id),
-    CONSTRAINT FK_extreme FOREIGN KEY (extreme_id) REFERENCES extreme_workouts(extreme_id)
- );
+          CREATE TABLE generate_new_workout_id (
+          generated_workout_id SERIAL,
+          CONSTRAINT PK_generate PRIMARY KEY (generated_workout_id)
+          );
+
+          CREATE TABLE generated_workouts (
+          randomized_id SERIAL,
+          generated_workout_id SERIAL,
+          workout_id SERIAL,
+          difficulty varchar(100) NOT NULL,
+          user_id SERIAL,
+          CONSTRAINT PK_randomized_id PRIMARY KEY (randomized_id),
+          CONSTRAINT FK_generated_workout_id FOREIGN KEY (generated_workout_id) REFERENCES generate_new_workout_id(generated_workout_id),
+          CONSTRAINT FK_workout_id FOREIGN KEY (workout_id) REFERENCES workouts(workout_id),
+          CONSTRAINT FK_user_id FOREIGN KEY (user_id) REFERENCES users(user_id)
+          );
+
+
 
 COMMIT TRANSACTION;
