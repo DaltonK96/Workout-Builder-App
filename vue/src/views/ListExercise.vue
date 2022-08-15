@@ -1,19 +1,24 @@
 <template>
   <div>
-     
-        
+    <h1> List of Exercises </h1>
       
       <table>
+
           <thead>
               <tr>
                 
               </tr>
           </thead>
           <tbody>
-              <tr v-for="workout in $store.state.uniqueCards" v-bind:key="workout.workoutId">
+              <tr v-for="workout in $store.state.uniqueWorkouts" v-bind:key="workout.workoutId">
                   <td>{{workout.workoutId}}</td>
                   <td>{{workout.workoutName}}</td>
                   <td>{{workout.workoutDesc}}</td>
+                  <td>{{workout.expectedTarget}}</td>
+                  <td>{{workout.weight}}</td>
+                  <td>{{workout.repSet}}</td>
+                  <td>{{workout.time}}</td>
+                  
                   <td>
                       <router-link v-bind:to="{name: 'Edit', params: {workoutId: workout.workoutId}}">Edit</router-link>
                       &nbsp; &nbsp;
@@ -32,20 +37,19 @@ export default {
     name: 'list-workouts',
     data() {
         return {
-            cards : [],
+            workouts : [],
             errorMsg: ""
         }
     },
     created() {
-        this.workouts();
+        this.loadAllFullWorkouts();
     }, 
     methods: {
-        workouts() {
-            WorkoutService.getUniqueWorkouts().then(
-                response => {
-                     [],   
-                    this.workouts = response.data;
-                    this.$store.commit("SET_UNIQUE_LIST_EXERCISE", this.workouts);
+        loadAllFullWorkouts() {
+            WorkoutService.ListExercise().then(
+                response => {  
+                   const workouts = response.data;
+                    this.$store.commit("SET_UNIQUE_LIST_EXERCISE", workouts);
                 }
             )
         },
