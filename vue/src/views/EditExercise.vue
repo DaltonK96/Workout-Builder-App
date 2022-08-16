@@ -1,6 +1,6 @@
 <template>
   <div id="edit-exercise">
-      <form class="form-edit-exercise" @submit.prevent="editExercise">
+      <form class="form-edit-exercise">
           <div class="edit-Exercise">
   <h1 id="edit-exercise-test" class="h3 mb-3 font-weight-normal">Edit Exercise</h1>
 
@@ -8,7 +8,9 @@
 
 <div>
 
-  <h1>{{workout.workoutName}}</h1>
+  <h2>{{workout.workoutName}}</h2>
+  
+
   <label for= "difficultyLevel">Difficulty Level</label>
 
 <select name="difficulty_level" id="difficulty_level" v-model="level">
@@ -62,6 +64,7 @@ export default {
      name: "editExercise",
     data(){
         return {
+            
             level: '',
             workout:{},
             difficultyLevel: {
@@ -85,8 +88,9 @@ WorkoutService.exerciseById(this.$route.params.workoutId).then(
 },
 methods: {
         editExercise(){
+          this.difficultyLevel.workoutId=this.workout.workoutId;
          WorkoutService
-            .editExercise(this.workout,this.level)
+            .editExercise(this.difficultyLevel,this.level)
             .then((response) => {
                 if(response.status ==201){
                 this.$router.push({
@@ -102,11 +106,8 @@ methods: {
               this.editExerciseErrorMsg = 'Bad Request: Validation Errors';
             }
           });
-      }/*,
-        exerciseById(){
-          WorkoutService
-            .exerciseById(this.workout.)
-        }*/
+     
+        }
 }
 }
 
