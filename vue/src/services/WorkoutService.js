@@ -5,8 +5,13 @@ export default {
   addExercise(user) {
     return axios.post('/workouts', user)
   },
+  
   ListExercise() {
     return axios.get('/workouts/all')
+  },
+
+  exerciseById(id) {
+    return axios.get('/workouts/' + id)
   },
 
 

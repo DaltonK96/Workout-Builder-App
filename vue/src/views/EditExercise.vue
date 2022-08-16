@@ -7,7 +7,10 @@
 </div>
 
 <div>
+
+  <h1>{{workout.workoutName}}</h1>
   <label for= "difficultyLevel">Difficulty Level</label>
+
 <select name="difficulty_level" id="difficulty_level" v-model="level">
   <optgroup label="Difficulty Level">
     <option value="beginner">Beginner</option>
@@ -60,6 +63,7 @@ export default {
     data(){
         return {
             level: '',
+            workout:{},
             difficultyLevel: {
                 weight: '',
                 repSet: '',
@@ -68,6 +72,15 @@ export default {
             editExerciseErrors: false,
             editExerciseErrorMsg: 'There was a problem adding level',
         };
+
+},
+created(){
+WorkoutService.exerciseById(this.$route.params.workoutId).then(
+  response => {
+    this.workout = response.data;
+  }
+)
+
 
 },
 methods: {
@@ -89,8 +102,11 @@ methods: {
               this.editExerciseErrorMsg = 'Bad Request: Validation Errors';
             }
           });
-      }
-     
+      }/*,
+        exerciseById(){
+          WorkoutService
+            .exerciseById(this.workout.)
+        }*/
 }
 }
 

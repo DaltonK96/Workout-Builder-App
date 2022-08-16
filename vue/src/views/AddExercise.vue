@@ -83,10 +83,10 @@ export default {
               this.addExerciseErrorMsg = 'Bad Request: Validation Errors';
             }
           });
-
+        },
           saveWorkout() {
 
-            WorkoutService.saveWorkout(this.workout).then(
+            /*WorkoutService.saveWorkout(this.workout).then(
                 () => {
                     this.$router.push({name: "List"});
                 }
@@ -100,9 +100,9 @@ export default {
                         this.errorMsg = "Error - we couldn't create the request";
                     }
                 }
-            );
+            );*/
         }
-
+        
     }
 }
 </script>

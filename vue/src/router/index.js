@@ -65,23 +65,7 @@ const router = new Router({
       }
     },
     {
-      path: "/workouts/beginner",
-      name: "EditExercise",
-      component: EditExercise,
-      meta: {
-        requiresAuth: false
-      }
-    },
-    {
-      path: "/workouts/intermediate",
-      name: "EditExercise",
-      component: EditExercise,
-      meta: {
-        requiresAuth: false
-      }
-    },
-    {
-      path: "/workouts/extreme",
+      path: "/workouts/edit/:workoutId",
       name: "EditExercise",
       component: EditExercise,
       meta: {
@@ -95,7 +79,16 @@ const router = new Router({
       meta: {
         requiresAuth: false
       }
-    }
+     },
+     {
+      path: "/workouts/edit:workout.id",
+      name: "ListExercise",
+      component: ListExercise,
+      meta: {
+        requiresAuth: false
+      }
+     },
+
   ]
 })
 
