@@ -1,16 +1,11 @@
 package com.techelevator.controller;
 
-import com.techelevator.dao.BeginnerDao;
-import com.techelevator.dao.ExtremeDao;
-import com.techelevator.dao.IntermediateDao;
-import com.techelevator.dao.WorkoutDAO;
-import com.techelevator.model.DifficultyLevel;
-import com.techelevator.model.DifficultyLevelDTO;
-import com.techelevator.model.Workout;
-import com.techelevator.model.WorkoutDTO;
+import com.techelevator.dao.*;
+import com.techelevator.model.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 //@PreAuthorize("isAuthenticated()")
@@ -22,13 +17,17 @@ public class WorkoutController
     private BeginnerDao beginnerDao;
     private IntermediateDao intermediateDao;
     private ExtremeDao extremeDao;
+    private WorkoutGeneratorDao workoutGeneratorDao;
+    private UserDao userDao;
 
-    public WorkoutController(WorkoutDAO workoutDAO, BeginnerDao beginnerDao, IntermediateDao intermediateDao, ExtremeDao extremeDao)
+    public WorkoutController(WorkoutDAO workoutDAO, BeginnerDao beginnerDao, IntermediateDao intermediateDao, ExtremeDao extremeDao, WorkoutGeneratorDao workoutGeneratorDao, UserDao userDao)
     {
         this.workoutDAO = workoutDAO;
         this.beginnerDao = beginnerDao;
         this.intermediateDao = intermediateDao;
         this.extremeDao = extremeDao;
+        this.workoutGeneratorDao = workoutGeneratorDao;
+        this.userDao = userDao;
     }
 
     @RequestMapping(path = "/workouts", method = RequestMethod.POST)
@@ -141,4 +140,12 @@ public class WorkoutController
     public Workout getWorkoutById(@PathVariable ("id") int id) {
         return workoutDAO.getWorkoutById(id);
     }
+
+    @RequestMapping(path = "/randomWorkoutsXD", method = RequestMethod.POST)
+    public List<Generator> createRandomWorkout(Principal user, @RequestBody GeneratorDTO generatorDTO)
+    {
+        return workoutGeneratorDao.createRandomWorkouts(generatorDTO.getTarget(), generatorDTO.getTime(), userDao.findIdByUsername(user.getName()), generatorDTO.getDifficulty());
+    }
+
+
 }

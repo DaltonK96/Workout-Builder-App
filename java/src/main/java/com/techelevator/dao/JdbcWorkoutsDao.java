@@ -70,7 +70,7 @@ public class JdbcWorkoutsDao implements WorkoutDAO{
    @Override
    public List<Workout> getFullBeginnerWorkouts() {
        List<Workout> workouts = new ArrayList<>();
-       String sql = "SELECT beginner_workouts.workout_id, workout_name, workout_desc, expected_target, beginner_workouts.weight, beginner_workouts.expected_rep_set, beginner_workouts.expected_time " +
+       String sql = "SELECT beginner_workouts.workout_id, workout_name, workout_desc, expected_target, beginner_workouts.weight, beginner_workouts.expected_rep_set, beginner_workouts.expected_time, beginner_workouts.difficulty " +
                "FROM workouts " + "JOIN beginner_workouts ON workouts.workout_id = beginner_workouts.workout_id;";
        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
@@ -86,7 +86,7 @@ public class JdbcWorkoutsDao implements WorkoutDAO{
     @Override
     public List<Workout> getFullIntermediateWorkouts() {
         List<Workout> workouts = new ArrayList<>();
-        String sql = "SELECT intermediate_workouts.workout_id, workout_name, workout_desc, expected_target, intermediate_workouts.weight, intermediate_workouts.expected_rep_set, intermediate_workouts.expected_time " +
+        String sql = "SELECT intermediate_workouts.workout_id, workout_name, workout_desc, expected_target, intermediate_workouts.weight, intermediate_workouts.expected_rep_set, intermediate_workouts.expected_time, intermediate_workouts.difficulty " +
                 "FROM workouts " + "JOIN intermediate_workouts ON workouts.workout_id = intermediate_workouts.workout_id;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
@@ -102,7 +102,7 @@ public class JdbcWorkoutsDao implements WorkoutDAO{
     @Override
     public List<Workout> getFullExtremeWorkouts() {
         List<Workout> workouts = new ArrayList<>();
-        String sql = "SELECT workouts.workout_id, workout_name, workout_desc, expected_target, extreme_workouts.weight, extreme_workouts.expected_rep_set, extreme_workouts.expected_time " +
+        String sql = "SELECT workouts.workout_id, workout_name, workout_desc, expected_target, extreme_workouts.weight, extreme_workouts.expected_rep_set, extreme_workouts.expected_time, extreme_workouts.difficulty " +
                 "FROM workouts " + "JOIN extreme_workouts ON workouts.workout_id = extreme_workouts.workout_id;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
@@ -113,6 +113,23 @@ public class JdbcWorkoutsDao implements WorkoutDAO{
         }
 
         return workouts;
+    }
+
+    @Override
+    public int getTimeByIdAndDifficulty(int id, String difficulty)
+    {
+        List<Workout> allWorkouts = getAllFullWorkouts();
+        int time = 0;
+
+        for (Workout workout : allWorkouts)
+        {
+            if (workout.getWorkoutId() == id && workout.getDifficulty().equals(difficulty))
+            {
+                time = workout.getTime();
+            }
+        }
+
+        return time;
     }
 
     @Override
@@ -200,6 +217,7 @@ public class JdbcWorkoutsDao implements WorkoutDAO{
         workout.setWeight(rowSet.getString("weight"));
         workout.setRepSet(rowSet.getString("expected_rep_set"));
         workout.setTime(rowSet.getInt("expected_time"));
+        workout.setDifficulty(rowSet.getString("difficulty"));
         return workout;
     }
 }
