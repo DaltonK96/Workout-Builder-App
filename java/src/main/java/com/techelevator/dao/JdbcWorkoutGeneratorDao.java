@@ -23,14 +23,42 @@ public class JdbcWorkoutGeneratorDao implements WorkoutGeneratorDao
         this.workoutDAO = workoutDAO;
     }
 
+    private int newGeneratedId()
+    {
+        int id = 0;
+
+        String sql = "SELECT * " +
+                "FROM generate_new_workout_id " +
+                "ORDER BY generated_workout_id DESC " +
+                "LIMIT 1;";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+
+        if (results.next())
+        {
+            id = mapRowToInt(results);
+        }
+
+        return id +1;
+    }
+
     @Override
     public int create()
     {
-        String sql = "INSERT INTO generate_new_workout_id " +
-                "VALUES () " +
-                "RETURNING generated_workout_id";
+        int id = 0;
 
-        Integer id = jdbcTemplate.queryForObject(sql, Integer.class);
+        String sql = "INSERT INTO generate_new_workout_id " +
+                "VALUES (?) " +
+                "RETURNING generated_workout_id;";
+
+        int genId =  newGeneratedId();
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, genId);
+
+        if (results.next())
+        {
+            id = mapRowToInt(results);
+        }
 
         return id;
     }
@@ -38,7 +66,7 @@ public class JdbcWorkoutGeneratorDao implements WorkoutGeneratorDao
     @Override
     public Generator create(int generatedWorkoutId, int workoutId, String difficulty, int userId)
     {
-        String sql = "INSERT INTO generated_workouts (generated_workout_id, workout_id, difficulty, user_id " +
+        String sql = "INSERT INTO generated_workouts (generated_workout_id, workout_id, difficulty, user_id) " +
                 "VALUES (?, ?, ?, ?) " +
                 "RETURNING randomized_id;";
 
@@ -73,7 +101,7 @@ public class JdbcWorkoutGeneratorDao implements WorkoutGeneratorDao
 
         List<Generator> generatedWorkouts = new ArrayList<>();
 
-        while (timeCounter <= time - 10 && timeCounter >= time + 10)
+        while (timeCounter <= time - 10 && timeCounter <= time + 10)
         {
             Generator generator = createRandomWorkout(target, userId, difficulty, generatedId);
             timeCounter += workoutDAO.getTimeByIdAndDifficulty(generator.getWorkoutId(), difficulty);
@@ -107,6 +135,31 @@ public class JdbcWorkoutGeneratorDao implements WorkoutGeneratorDao
 
     }
 
+    public List<Generator> getWorkoutHistory(int id)
+    {
+        List<Generator> history = new ArrayList<>();
+
+        String sql = "SELECT * " +
+                "FROM generated_workouts " +
+                "WHERE user_id = ?;";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
+
+        while (results.next())
+        {
+            Generator generator = mapRowToGenerator(results);
+            history.add(generator);
+        }
+
+        return history;
+    }
+
+    private int mapRowToInt (SqlRowSet rowSet)
+    {
+        int id = rowSet.getInt("generated_workout_id");
+
+        return id;
+    }
 
     private Generator mapRowToGenerator(SqlRowSet rowSet)
     {

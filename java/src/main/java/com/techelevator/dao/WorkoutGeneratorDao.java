@@ -16,4 +16,5 @@ public interface WorkoutGeneratorDao
 
     Generator createRandomWorkout(String target, int userId, String difficulty, int generatedId);
 
+    List<Generator> getWorkoutHistory(int id);
 }

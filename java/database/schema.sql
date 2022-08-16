@@ -61,13 +61,13 @@ CREATE TABLE intermediate_workouts (
           );
 
           CREATE TABLE generate_new_workout_id (
-          generated_workout_id SERIAL,
+          generated_workout_id int UNIQUE,
           CONSTRAINT PK_generate PRIMARY KEY (generated_workout_id)
           );
 
           CREATE TABLE generated_workouts (
           randomized_id SERIAL,
-          generated_workout_id SERIAL,
+          generated_workout_id int,
           workout_id SERIAL,
           difficulty varchar(100) NOT NULL,
           user_id SERIAL,
