@@ -5,6 +5,7 @@ import com.techelevator.model.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 //@PreAuthorize("isAuthenticated()")
@@ -17,14 +18,16 @@ public class WorkoutController
     private IntermediateDao intermediateDao;
     private ExtremeDao extremeDao;
     private WorkoutGeneratorDao workoutGeneratorDao;
+    private UserDao userDao;
 
-    public WorkoutController(WorkoutDAO workoutDAO, BeginnerDao beginnerDao, IntermediateDao intermediateDao, ExtremeDao extremeDao, WorkoutGeneratorDao workoutGeneratorDao)
+    public WorkoutController(WorkoutDAO workoutDAO, BeginnerDao beginnerDao, IntermediateDao intermediateDao, ExtremeDao extremeDao, WorkoutGeneratorDao workoutGeneratorDao, UserDao userDao)
     {
         this.workoutDAO = workoutDAO;
         this.beginnerDao = beginnerDao;
         this.intermediateDao = intermediateDao;
         this.extremeDao = extremeDao;
         this.workoutGeneratorDao = workoutGeneratorDao;
+        this.userDao = userDao;
     }
 
     @RequestMapping(path = "/workouts", method = RequestMethod.POST)
@@ -139,10 +142,9 @@ public class WorkoutController
     }
 
     @RequestMapping(path = "/randomWorkoutsXD", method = RequestMethod.POST)
-    public List<Generator> createRandomWorkout(@RequestBody GeneratorDTO generatorDTO)
+    public List<Generator> createRandomWorkout(Principal user, @RequestBody GeneratorDTO generatorDTO)
     {
-        //TODO: add in DTO AND FINISH METHOD
-        return workoutGeneratorDao.createRandomWorkouts();
+        return workoutGeneratorDao.createRandomWorkouts(generatorDTO.getTarget(), generatorDTO.getTime(), userDao.findIdByUsername(user.getName()), generatorDTO.getDifficulty());
     }
 
 
