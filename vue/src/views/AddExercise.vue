@@ -86,9 +86,9 @@ export default {
         },
           saveWorkout() {
 
-            /*WorkoutService.saveWorkout(this.workout).then(
+            WorkoutService.saveWorkout(this.workout).then(
                 () => {
-                    this.$router.push({name: "List"});
+                    this.$router.push({name: "ListExercise"});
                 }
             ).catch(
                 error => {
@@ -100,7 +100,7 @@ export default {
                         this.errorMsg = "Error - we couldn't create the request";
                     }
                 }
-            );*/
+            );
         }
         
     }
