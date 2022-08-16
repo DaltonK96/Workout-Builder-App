@@ -116,6 +116,23 @@ public class JdbcWorkoutsDao implements WorkoutDAO{
     }
 
     @Override
+    public int getTimeByIdAndDifficulty(int id, String difficulty)
+    {
+        List<Workout> allWorkouts = getAllFullWorkouts();
+        int time = 0;
+
+        for (Workout workout : allWorkouts)
+        {
+            if (workout.getWorkoutId() == id && workout.getDifficulty().equals(difficulty))
+            {
+                time = workout.getTime();
+            }
+        }
+
+        return time;
+    }
+
+    @Override
     public List<Workout> getAllFullWorkouts() {
         List<Workout> beginnerWorkouts = getFullBeginnerWorkouts();
         List<Workout> intermediateWorkouts = getFullIntermediateWorkouts();

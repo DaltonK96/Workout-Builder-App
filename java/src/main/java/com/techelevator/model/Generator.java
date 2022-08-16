@@ -24,6 +24,14 @@ public class Generator
         this.userId = userId;
     }
 
+    public Generator(int generatedId, int workoutId, String difficulty, int userId)
+    {
+        this.generatedId = generatedId;
+        this.workoutId = workoutId;
+        this.difficulty = difficulty;
+        this.userId = userId;
+    }
+
     public int getGeneratedId() {return generatedId;}
     public void setGeneratedId(int generatedId) {this.generatedId = generatedId;}
 

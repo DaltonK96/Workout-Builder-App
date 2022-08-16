@@ -1,13 +1,7 @@
 package com.techelevator.controller;
 
-import com.techelevator.dao.BeginnerDao;
-import com.techelevator.dao.ExtremeDao;
-import com.techelevator.dao.IntermediateDao;
-import com.techelevator.dao.WorkoutDAO;
-import com.techelevator.model.DifficultyLevel;
-import com.techelevator.model.DifficultyLevelDTO;
-import com.techelevator.model.Workout;
-import com.techelevator.model.WorkoutDTO;
+import com.techelevator.dao.*;
+import com.techelevator.model.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,13 +16,15 @@ public class WorkoutController
     private BeginnerDao beginnerDao;
     private IntermediateDao intermediateDao;
     private ExtremeDao extremeDao;
+    private WorkoutGeneratorDao workoutGeneratorDao;
 
-    public WorkoutController(WorkoutDAO workoutDAO, BeginnerDao beginnerDao, IntermediateDao intermediateDao, ExtremeDao extremeDao)
+    public WorkoutController(WorkoutDAO workoutDAO, BeginnerDao beginnerDao, IntermediateDao intermediateDao, ExtremeDao extremeDao, WorkoutGeneratorDao workoutGeneratorDao)
     {
         this.workoutDAO = workoutDAO;
         this.beginnerDao = beginnerDao;
         this.intermediateDao = intermediateDao;
         this.extremeDao = extremeDao;
+        this.workoutGeneratorDao = workoutGeneratorDao;
     }
 
     @RequestMapping(path = "/workouts", method = RequestMethod.POST)
@@ -141,4 +137,13 @@ public class WorkoutController
     public Workout getWorkoutById(@PathVariable ("id") int id) {
         return workoutDAO.getWorkoutById(id);
     }
+
+    @RequestMapping(path = "/randomWorkoutsXD", method = RequestMethod.POST)
+    public List<Generator> createRandomWorkout(@RequestBody GeneratorDTO generatorDTO)
+    {
+        //TODO: add in DTO AND FINISH METHOD
+        return workoutGeneratorDao.createRandomWorkouts();
+    }
+
+
 }

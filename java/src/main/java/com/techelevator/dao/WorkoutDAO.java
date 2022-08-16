@@ -25,4 +25,6 @@ public interface WorkoutDAO
     List<Workout> getWorkoutByTime(int time);
 
     Workout updateWorkout(int id, String name, String desc, String target);
+
+    int getTimeByIdAndDifficulty(int id, String difficulty);
 }
