@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Generator;
+import com.techelevator.model.Workout;
 
 import java.util.List;
 
@@ -17,4 +18,6 @@ public interface WorkoutGeneratorDao
     Generator createRandomWorkout(String target, int userId, String difficulty, int generatedId);
 
     List<Generator> getWorkoutHistory(int id);
+
+    List<Workout> listOfGeneratedWorkouts(int id);
 }

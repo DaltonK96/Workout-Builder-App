@@ -153,4 +153,9 @@ public class WorkoutController
         return workoutGeneratorDao.getWorkoutHistory(userDao.findIdByUsername(user.getName()));
     }
 
+    @RequestMapping(path = "/workouts/randomlyGenerated/{id}", method = RequestMethod.GET)
+    public List<Workout> getFullRandomlyGenWorkouts(@PathVariable ("id") int id)
+    {
+        return workoutGeneratorDao.listOfGeneratedWorkouts(id);
+    }
 }
