@@ -20,4 +20,6 @@ public interface WorkoutGeneratorDao
     List<Generator> getWorkoutHistory(int id);
 
     List<Workout> listOfGeneratedWorkouts(int id);
+
+    boolean delete(int workoutId);
 }

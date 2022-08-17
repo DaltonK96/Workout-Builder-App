@@ -14,4 +14,5 @@ public interface ExtremeDao
 
     DifficultyLevel updateExtremeWorkout(int id, int workoutId, String weight, String repSet, int time);
 
+    boolean delete(int workoutId);
 }

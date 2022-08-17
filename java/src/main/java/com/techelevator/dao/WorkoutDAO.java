@@ -27,4 +27,6 @@ public interface WorkoutDAO
     Workout updateWorkout(int id, String name, String desc, String target);
 
     int getTimeByIdAndDifficulty(int id, String difficulty);
+
+    boolean delete(int workoutId);
 }

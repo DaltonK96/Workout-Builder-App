@@ -158,4 +158,14 @@ public class WorkoutController
     {
         return workoutGeneratorDao.listOfGeneratedWorkouts(id);
     }
+
+    @RequestMapping(path = "/workouts/{id}", method = RequestMethod.DELETE)
+    public void getDeleteWorkouts (@PathVariable ("id") int id)
+    {
+        beginnerDao.delete(id);
+        intermediateDao.delete(id);
+        extremeDao.delete(id);
+        workoutGeneratorDao.delete(id);
+        workoutDAO.delete(id);
+    }
 }

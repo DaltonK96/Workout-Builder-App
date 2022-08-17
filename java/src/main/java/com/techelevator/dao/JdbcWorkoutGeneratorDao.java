@@ -215,6 +215,18 @@ public class JdbcWorkoutGeneratorDao implements WorkoutGeneratorDao
         return id;
     }
 
+    @Override
+    public boolean delete(int workoutId)
+    {
+        String sql = "DELETE " +
+                "FROM generated_workouts " +
+                "WHERE workout_id = ?;";
+
+
+        return jdbcTemplate.update(sql, workoutId) == 1;
+
+    }
+
     private Generator mapRowToGenerator(SqlRowSet rowSet)
     {
         Generator generator = new Generator();
