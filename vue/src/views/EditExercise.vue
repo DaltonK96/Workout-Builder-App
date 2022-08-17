@@ -1,6 +1,6 @@
 <template>
   <div id="edit-exercise">
-      <form class="form-edit-exercise">
+      <form class="form-edit-exercise" v-on:submit.prevent="">
           <div class="edit-Exercise">
   <h1 id="edit-exercise-test" class="h3 mb-3 font-weight-normal">Edit Exercise</h1>
 
@@ -92,11 +92,12 @@ methods: {
          WorkoutService
             .editExercise(this.difficultyLevel,this.level)
             .then((response) => {
-                if(response.status ==201){
-                this.$router.push({
+                if(response.status ==200){
+                  this.$router.push({name: "ListExercise"})
+                /*this.$router.push({
                     path:'/workout/'+ this.level,
                     query:{ WorkoutService: 'success'},
-                });
+                });*/
             }
         })
           .catch((error) => {
@@ -106,8 +107,10 @@ methods: {
               this.editExerciseErrorMsg = 'Bad Request: Validation Errors';
             }
           });
-     
-        }
+          
+        },
+        
+        
 }
 }
 
