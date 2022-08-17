@@ -8,6 +8,8 @@ import store from '../store/index'
 import AddExercise from '../views/AddExercise.vue'
 import EditExercise from '../views/EditExercise.vue'
 import ListExercise from '../views/ListExercise.vue'
+import GenerateRandom from '../views/ListExercise.vue'
+
 
 Vue.use(Router)
 
@@ -84,6 +86,14 @@ const router = new Router({
       path: "/workouts/edit:workout.id",
       name: "ListExercise",
       component: ListExercise,
+      meta: {
+        requiresAuth: false
+      }
+     },
+     {
+      path: "/randomWorkouts",
+      name: "GenerateRandom",
+      component: GenerateRandom,
       meta: {
         requiresAuth: false
       }

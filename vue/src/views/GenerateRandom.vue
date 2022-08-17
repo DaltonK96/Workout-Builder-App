@@ -1,8 +1,8 @@
 <template>
-  <div id="add-exercise">
-      <form class="form-add-exercise">
-          <div class="add-Exercise">
-  <h1 id="add-exercise-test" class="h3 mb-3 font-weight-normal">Add Exercise </h1>
+  <div id="generate-random">
+      <form class="form-generate-random" @submit.prevent="addExercise" >
+          <div class="generate-random">
+  <h1 id="generate-random-test" class="h3 mb-3 font-weight-normal">Generate Random Workout</h1>
 
 </div>
   <label for="workoutName"> Workout Name </label>
@@ -46,11 +46,10 @@
 </template>
 
 <script>
+
 import WorkoutService  from "../services/WorkoutService";
 
-
-export default {
-    name: "addExercise",
+export default {name: "generateRandomExercise",
     data(){
         return {
             workout: {
@@ -59,7 +58,7 @@ export default {
                 expectedTarget: '',
             },
             addExerciseErrors: false,
-            addExerciseErrorMsg: 'There was a problem adding workout',
+            addExerciseErrorMsg: 'There was a problem generating workout',
 
         };
     },

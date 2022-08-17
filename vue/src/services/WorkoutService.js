@@ -14,7 +14,9 @@ export default {
     return axios.get('/workouts/' + id)
   },
 
-
+  generateRandomExercise(user) {
+    return axios.post('/randomWorkouts', user)
+  },
 
   editExercise(user,level){
     if(level=== "beginner"){
