@@ -153,4 +153,19 @@ public class WorkoutController
         return workoutGeneratorDao.getWorkoutHistory(userDao.findIdByUsername(user.getName()));
     }
 
+    @RequestMapping(path = "/workouts/randomlyGenerated/{id}", method = RequestMethod.GET)
+    public List<Workout> getFullRandomlyGenWorkouts(@PathVariable ("id") int id)
+    {
+        return workoutGeneratorDao.listOfGeneratedWorkouts(id);
+    }
+
+    @RequestMapping(path = "/workouts/{id}", method = RequestMethod.DELETE)
+    public void getDeleteWorkouts (@PathVariable ("id") int id)
+    {
+        beginnerDao.delete(id);
+        intermediateDao.delete(id);
+        extremeDao.delete(id);
+        workoutGeneratorDao.delete(id);
+        workoutDAO.delete(id);
+    }
 }

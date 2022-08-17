@@ -200,6 +200,18 @@ public class JdbcWorkoutsDao implements WorkoutDAO{
         return workout;
     }
 
+    @Override
+    public boolean delete(int workoutId)
+    {
+        String sql = "DELETE " +
+                "FROM workouts " +
+                "WHERE workout_id = ?;";
+
+
+        return jdbcTemplate.update(sql, workoutId) == 1;
+
+    }
+
    private Workout mapRowToWorkout(SqlRowSet rowSet) {
        Workout workout = new Workout();
        workout.setWorkoutId(rowSet.getInt("workout_id"));

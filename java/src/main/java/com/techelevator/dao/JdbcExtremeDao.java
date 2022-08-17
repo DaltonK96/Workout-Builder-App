@@ -79,6 +79,18 @@ public class JdbcExtremeDao implements ExtremeDao
         return extreme;
     }
 
+    @Override
+    public boolean delete(int workoutId)
+    {
+        String sql = "DELETE " +
+                "FROM extreme_workouts " +
+                "WHERE workout_id = ?;";
+
+
+        return jdbcTemplate.update(sql, workoutId) == 1;
+
+    }
+
     private DifficultyLevel mapRowToExtreme (SqlRowSet rowSet)
     {
         DifficultyLevel difficultyLevel = new DifficultyLevel();

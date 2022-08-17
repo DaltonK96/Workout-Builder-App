@@ -82,6 +82,18 @@ public class JdbcIntermediateDao implements IntermediateDao
         return intermediate;
     }
 
+    @Override
+    public boolean delete(int workoutId)
+    {
+        String sql = "DELETE " +
+                "FROM intermediate_workouts " +
+                "WHERE workout_id = ?;";
+
+
+        return jdbcTemplate.update(sql, workoutId) == 1;
+
+    }
+
     private DifficultyLevel mapRowToIntermediate (SqlRowSet rowSet)
     {
         DifficultyLevel difficultyLevel = new DifficultyLevel();

@@ -135,6 +135,60 @@ public class JdbcWorkoutGeneratorDao implements WorkoutGeneratorDao
 
     }
 
+    @Override
+    public List<Workout> listOfGeneratedWorkouts(int id)
+    {
+        List<Workout> workouts = new ArrayList<>();
+
+        List<Generator> generatedWorkouts = getWorkoutIdsByGeneratedId(id);
+
+        String difficulty = "";
+        List<Integer> workoutIds = new ArrayList<>();
+
+        for (Generator workout : generatedWorkouts)
+        {
+            int workoutId = workout.getWorkoutId();
+            difficulty = workout.getDifficulty();
+            workoutIds.add(workoutId);
+        }
+
+        List<Workout> allWorkouts = workoutDAO.getAllFullWorkouts();
+
+        for (int workoutId : workoutIds)
+        {
+            for (Workout workout : allWorkouts)
+            {
+                if (workoutId == workout.getWorkoutId() && difficulty.equals(workout.getDifficulty()))
+                {
+                    workouts.add(workout);
+                    break;
+                }
+            }
+        }
+
+        return workouts;
+    }
+
+    public List<Generator> getWorkoutIdsByGeneratedId(int id)
+    {
+        List<Generator> workouts = new ArrayList<>();
+
+        String sql = "SELECT * " +
+                "FROM generated_workouts " +
+                "WHERE generated_workout_id = ?;";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql,id);
+
+        while (results.next())
+        {
+            Generator workout = mapRowToGenerator(results);
+            workouts.add(workout);
+
+        }
+
+        return workouts;
+    }
+
     public List<Generator> getWorkoutHistory(int id)
     {
         List<Generator> history = new ArrayList<>();
@@ -159,6 +213,18 @@ public class JdbcWorkoutGeneratorDao implements WorkoutGeneratorDao
         int id = rowSet.getInt("generated_workout_id");
 
         return id;
+    }
+
+    @Override
+    public boolean delete(int workoutId)
+    {
+        String sql = "DELETE " +
+                "FROM generated_workouts " +
+                "WHERE workout_id = ?;";
+
+
+        return jdbcTemplate.update(sql, workoutId) == 1;
+
     }
 
     private Generator mapRowToGenerator(SqlRowSet rowSet)

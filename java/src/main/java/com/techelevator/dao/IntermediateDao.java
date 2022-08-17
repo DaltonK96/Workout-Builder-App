@@ -13,4 +13,6 @@ public interface IntermediateDao
     List<DifficultyLevel> getAllIntermediateWorkouts();
 
     DifficultyLevel updateIntermediateWorkout(int id, int workoutId, String weight, String repSet, int time);
+
+    boolean delete(int workoutId);
 }

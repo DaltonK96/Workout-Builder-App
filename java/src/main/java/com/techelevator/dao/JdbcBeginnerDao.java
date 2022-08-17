@@ -80,6 +80,18 @@ public class JdbcBeginnerDao implements BeginnerDao {
         return beginner;
     }
 
+    @Override
+    public boolean delete(int workoutId)
+    {
+        String sql = "DELETE " +
+                "FROM beginner_workouts " +
+                "WHERE workout_id = ?;";
+
+
+        return jdbcTemplate.update(sql, workoutId) == 1;
+
+    }
+
     private DifficultyLevel mapRowToBeginner (SqlRowSet rowSet) {
         DifficultyLevel difficultyLevel = new DifficultyLevel();
         difficultyLevel.setId(rowSet.getInt("beginner_id"));
