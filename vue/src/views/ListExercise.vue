@@ -10,7 +10,7 @@
               </tr>
           </thead>
           <tbody>
-              <tr v-for="workout in $store.state.uniqueWorkouts" v-bind:key="workout.workoutId">
+              <tr v-for="(workout,index) in $store.state.uniqueWorkouts" v-bind:key="index">
                   <td>{{workout.workoutId}}</td>
                   <td>{{workout.workoutName}}</td>
                   <td>{{workout.workoutDesc}}</td>
@@ -29,6 +29,9 @@
           </tbody>
       </table>
   </div>
+
+
+
 </template>
 
 <script>
