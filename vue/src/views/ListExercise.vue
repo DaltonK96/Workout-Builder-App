@@ -10,20 +10,20 @@
               </tr>
           </thead>
           <tbody>
-              <tr v-for="(workout,index) in $store.state.uniqueWorkouts" v-bind:key="index">
-                  <td>{{workout.workoutId}}</td>
-                  <td>{{workout.workoutName}}</td>
-                  <td>{{workout.workoutDesc}}</td>
-                  <td>{{workout.expectedTarget}}</td>
-                  <td>{{workout.weight}}</td>
-                  <td>{{workout.repSet}}</td>
-                  <td>{{workout.time}}</td>
+              <tr v-for="(workout,index) in $store.state.uniqueWorkouts" v-bind:key="index" id="tableExercise">
+                  <td id="workoutId">{{workout.workoutId}}</td>
+                  <td id="workoutName">{{workout.workoutName}}</td>
+                  <td id="workoutDesc">{{workout.workoutDesc}}</td>
+                  <td id="expectedTarget">{{workout.expectedTarget}}</td>
+                  <td id="weight">{{workout.weight}}</td>
+                  <td id="repSet">{{workout.repSet}}</td>
+                  <td id="time">{{workout.time}}</td>
                   
                   <td>
                        
                       <router-link v-bind:to="{name: 'EditExercise', params: {workoutId: workout.workoutId}}">Edit</router-link>
                       &nbsp; &nbsp;
-                      <a href="#" v-on:click="deleteExercise(workout.workoutId)" >Delete</a>
+    
                   </td>
               </tr>
           </tbody>

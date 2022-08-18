@@ -1,3 +1,6 @@
+
+
+
 .login{
     color: darkorange;
     ;
@@ -6,7 +9,7 @@
   .form-signin {
     text-decoration:cyan;
     text-align: center;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    
     
     
   }
@@ -14,7 +17,7 @@
   .form-register {
     text-decoration:cyan;
     text-align: center;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    
   }
 
 #create-account{
@@ -91,3 +94,81 @@
 
     }
 
+    a:visited {
+      color: purple;
+    }
+    a:hover {
+      color: purple;
+    }
+
+    a:link, a:visited {
+      background-color: darkblue;
+      color: white;
+      padding: 14px 25px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+    }
+   
+    h1 {
+      background-color: orange;
+      color:darkblue;
+      font-family: monospace;
+    }
+    tbody{
+      padding: 120% ;
+      background-color: darkblue;
+      color:white;
+      font-family: fantasy;
+      border-style: solid;
+      border-width: 50px;
+    }
+    
+    #tableExercise{
+      display: inline-flexbox;
+      justify-content: space-evenly;
+      background-color: darkblue;
+      height: 25hv;
+      width: 25hw;
+      
+    }
+    #app{
+      display: flex;
+      width: 50%;
+      background-color: orange;
+
+    }#workoutId{
+      padding:25px
+    }
+  #workoutName{
+    padding:25px
+  }
+#workoutDesc{
+  padding:25px
+}
+
+#expectedTarget{
+  padding:25px
+}
+#weight{
+  padding:25px
+}
+#repSet{
+  padding:25px
+}
+#time{
+  padding:25px
+}
+
+#muscles{
+ 
+  position: center;
+  right: 100px;
+  width: 900px;
+  border: solid darkblue;
+}
+
+#bullImg{
+  width:auto;
+  height:auto;
+}

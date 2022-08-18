@@ -3,7 +3,6 @@
       <form v-on:submit.prevent="addExercise" class="form-add-exercise">
           <div class="add-Exercise">
   <h1 id="add-exercise-test" class="h3 mb-3 font-weight-normal">Add Exercise </h1>
-
 </div>
   <label for="workoutName"> Workout Name </label>
   <input
@@ -40,8 +39,10 @@
 <button class="btn btn-lg btn-primary btn-block" type="add">
     Add Workout
 </button>
-      </form>
-      </div>
+ </form>
+ <img src="../imgChristopher\IMG_7709.jpg" id="bullImg">
+ </div>
+ 
     
 </template>
 
