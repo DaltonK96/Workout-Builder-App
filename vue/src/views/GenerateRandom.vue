@@ -1,33 +1,32 @@
 <template>
   <div id="generate-random">
-      <form class="form-generate-random" @submit.prevent="addExercise" >
+      <form class="form-generate-random" @submit.prevent="generateRandomExercise" >
           <div class="generate-random">
   <h1 id="generate-random-test" class="h3 mb-3 font-weight-normal">Generate Random Workout</h1>
 
 </div>
-  <label for="workoutName"> Workout Name </label>
-  <input
-  type="text"
-  id="workoutName"
-  class="add-ex-form"
-  v-model="workout.workoutName"
-  required
-  autofocus
-  />
+<div>Select Difficulty</div>
+  <select name="difficulty" id="difficulty" v-model="workout.difficulty">
+  <optgroup label="difficulty">
+    <option value="beginner">Beginner</option>
+    <option value="intermediate">Intermediate</option>
+    <option value="extreme">Extreme</option>
+  </optgroup>
+  </select>
 
- <label for="workoutDesc"> Workout Description </label>
+ <label for="time">Expected Time Frame (min)</label>
   <input
   type="text"
   id="workoutDesc"
-  class="add-ex-form"
-  v-model="workout.workoutDesc"
+  class="gen-ex-form"
+  v-model="workout.time"
   required
   autofocus
   />
 
 <div>Target Area</div>
-<select name="expected_target" id="expected_target" v-model="workout.expectedTarget">
-  <optgroup label="Target Area">
+<select name="target" id="target" v-model="workout.target">
+  <optgroup label="Target">
     <option value="arms">Arms</option>
     <option value="legs">Legs</option>
     <option value="abs">Abs</option>
@@ -37,8 +36,8 @@
   </optgroup>
 </select>
 
-<button v-on:click="addExercise" class="btn btn-lg btn-primary btn-block" type="add">
-    Add Workout
+<button  type="add">
+    Generate Workout
 </button>
       </form>
       </div>
@@ -53,9 +52,9 @@ export default {name: "generateRandomExercise",
     data(){
         return {
             workout: {
-                workoutName: '',
-                workoutDesc: '',
-                expectedTarget: '',
+                difficulty: '',
+                time: '',
+                target: '',
             },
             addExerciseErrors: false,
             addExerciseErrorMsg: 'There was a problem generating workout',
@@ -64,12 +63,12 @@ export default {name: "generateRandomExercise",
     },
     methods: {
       
-        addExercise(){
+        generateRandomExercise(){
          WorkoutService 
-            .addExercise(this.workout)
+            .generateRandomExercise(this.workout)
             .then((response) => {
                 if(response.status ==200){
-                  this.$router.push({name: "ListExercise"})
+                  this.$router.push({name: "ListRandom"})
                 /*this.$router.push({
                     path:'/workout',
                     query:{ WorkoutService: 'success'},
@@ -88,7 +87,7 @@ export default {name: "generateRandomExercise",
 
             WorkoutService.saveWorkout(this.workout).then(
                 () => {
-                    this.$router.push({name: "ListExercise"});
+                    this.$router.push({name: "ListRandom"});
                 }
             ).catch(
                 error => {

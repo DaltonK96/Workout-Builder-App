@@ -1,6 +1,6 @@
 <template>
   <div id="add-exercise">
-      <form class="form-add-exercise">
+      <form v-on:submit.prevent="addExercise" class="form-add-exercise">
           <div class="add-Exercise">
   <h1 id="add-exercise-test" class="h3 mb-3 font-weight-normal">Add Exercise </h1>
 
@@ -37,7 +37,7 @@
   </optgroup>
 </select>
 
-<button v-on:click="addExercise" class="btn btn-lg btn-primary btn-block" type="add">
+<button class="btn btn-lg btn-primary btn-block" type="add">
     Add Workout
 </button>
       </form>
