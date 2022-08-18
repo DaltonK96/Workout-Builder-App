@@ -68,7 +68,8 @@ export default {name: "generateRandomExercise",
             .generateRandomExercise(this.workout)
             .then((response) => {
                 if(response.status ==200){
-                  this.$router.push({name: "ListRandom"})
+                    alert(response.data)
+                  this.$router.push({name: "ListRandom", params: {randomId:response.data}})
                 /*this.$router.push({
                     path:'/workout',
                     query:{ WorkoutService: 'success'},

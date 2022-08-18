@@ -84,7 +84,7 @@ const router = new Router({
       }
      },
      {
-      path: "/randomWorkouts",
+      path: "/randomWorkouts/",
       name: "GenerateRandom",
       component: GenerateRandom,
       meta: {
@@ -92,7 +92,7 @@ const router = new Router({
       }
      },
      {
-      path: "/workouts/randomlyGenerated/",
+      path: "/workouts/randomlyGenerated/random/:randomId",
       name: "ListRandom",
       component: ListRandom,
       meta: {
