@@ -142,17 +142,10 @@ public class WorkoutController
     }
 
     @RequestMapping(path = "/randomWorkouts", method = RequestMethod.POST)
-    public int createRandomWorkout(Principal user, @RequestBody GeneratorDTO generatorDTO)
+    public List<Generator> createRandomWorkout(Principal user, @RequestBody GeneratorDTO generatorDTO)
     {
-        List <Generator> newGeneratedWorkouts =  workoutGeneratorDao.createRandomWorkouts(generatorDTO.getTarget(), generatorDTO.getTime(), userDao.findIdByUsername(user.getName()), generatorDTO.getDifficulty());
-        int generatedId = 0;
 
-        for (Generator generator: newGeneratedWorkouts)
-        {
-            generatedId = generator.getGeneratedId();
-            break;
-        }
-        return generatedId;
+        return workoutGeneratorDao.createRandomWorkouts(generatorDTO.getTarget(), generatorDTO.getTime(), userDao.findIdByUsername(user.getName()), generatorDTO.getDifficulty());
     }
 
     @RequestMapping(path = "/workouts/history", method = RequestMethod.GET)
