@@ -144,6 +144,7 @@ public class WorkoutController
     @RequestMapping(path = "/randomWorkouts", method = RequestMethod.POST)
     public List<Generator> createRandomWorkout(Principal user, @RequestBody GeneratorDTO generatorDTO)
     {
+
         return workoutGeneratorDao.createRandomWorkouts(generatorDTO.getTarget(), generatorDTO.getTime(), userDao.findIdByUsername(user.getName()), generatorDTO.getDifficulty());
     }
 

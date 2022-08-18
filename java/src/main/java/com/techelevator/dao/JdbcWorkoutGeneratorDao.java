@@ -104,7 +104,8 @@ public class JdbcWorkoutGeneratorDao implements WorkoutGeneratorDao
         while (timeCounter <= time - 10 && timeCounter <= time + 10)
         {
             Generator generator = createRandomWorkout(target, userId, difficulty, generatedId);
-            timeCounter += workoutDAO.getTimeByIdAndDifficulty(generator.getWorkoutId(), difficulty);
+            int timeToAdd = workoutDAO.getTimeByIdAndDifficulty(generator.getWorkoutId(), difficulty);
+            timeCounter += timeToAdd;
             generatedWorkouts.add(generator);
 
         }
