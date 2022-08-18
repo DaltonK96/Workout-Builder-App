@@ -26,6 +26,9 @@ export default {
     } else{
       return axios.post('/workouts/extreme',user)
     }
-
+ 
+    },
+    deleteExercise(id){
+      return axios.delete('/workouts/'+ id)
     }
   }

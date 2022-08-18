@@ -57,10 +57,10 @@ export default {
                 }
             )
         },
-        deleteWorkout(workoutId) {
-            WorkoutService.deleteCard(workoutId).then(
+        deleteExercise(workoutId) {
+            WorkoutService.deleteExercise(workoutId).then(
                 () => {
-                    this.workouts();
+                    
                 }
             )
             .catch(
